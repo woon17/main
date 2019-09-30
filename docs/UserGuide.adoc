@@ -58,7 +58,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ==== Add a patient to the queue: `enqueue` ====
 
 Adds a patient to the queue +
-Format: `enqueue <PATIENT_REFERENCE_ID>`
+Format: `enqueue i/<PATIENT_REFERENCE_ID>`
 
 ==== Remove a patient from the queue: `dequeue` ====
 
@@ -88,7 +88,7 @@ Format: `resume <ROOM_NUMBER>`
 Finds patients whose reference ids, names or phone numbers containing any of the given keywords. +
 If search keywords are empty, all registered patients will be displayed. +
 Note: Requires at least 4 characters to search by a reference id or phone numbers. +
-Format: `patient [<PATIENT_REFERENCE_ID | PATIENT_NAME | PHONE_NUM>]`
+Format: `patient [i/<PATIENT_REFERENCE_ID | n/PATIENT_NAME | PHONE_NUM>]`
 
 ==== Registers a new patient: `register` ====
 
@@ -146,7 +146,7 @@ Format: `offduty <ROOM_NUMBER>`
 
 Displays a sorted list of upcoming appointments whose appointment is within +
 If search keywords are empty, only upcoming appointments within the next 7 days will be displayed. +
-Format: `appointments [-patient|-p <PATIENT_NAME | PATIENT_IC>] [-start|-s <START_DATE>] [-end|-e <END_DATE>]`
+Format: `appointments [-i <PATIENT_REFERENCE_ID>] [-start|-s <START_DATE>] [-end|-e <END_DATE>]`
 
 ==== Cancels an appointment: `cancel` ====
 
@@ -156,7 +156,7 @@ Format: `cancel <ENTRY_ID>`
 ==== Changes the appointment date: `change` ====
 
 Changes and updates to a new appointment detail in the appointment listing screen +
-Format: `change <ENTRY_ID> [-id|-i <PATIENT_IC>] [-start|-s <START_DATE>] [-end|-e <END_DATE>]`
+Format: `change <ENTRY_ID> [-i <PATIENT_REFERENCE_ID>] [-start|-s <START_DATE>] [-end|-e <END_DATE>]`
 
 ==== Shows the empty slots: `slot` ====
 
