@@ -98,14 +98,14 @@ public class AddAppCommandParser implements Parser<ReversibleActionPairCommand> 
         Function<Timing, Timing> func = null;
 
         switch (recursiveString) {
+        case "d":
+            func = Timing::getOneDayLaterTiming;
+            break;
         case "w":
             func = Timing::getOneWeekLaterTiming;
             break;
         case "m":
             func = Timing::getOneMonthLaterTiming;
-            break;
-        case "d":
-            func = Timing::getOneDayLaterTiming;
             break;
         default:
             func = Timing::getOneYearLaterTiming;
