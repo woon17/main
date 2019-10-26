@@ -85,6 +85,11 @@ public class AddAppCommandParser implements Parser<ReversibleActionPairCommand> 
             return new ReversibleActionPairCommand(new AddAppCommand(eventList),
                     new CancelAppCommand(eventList));
         } else {
+            if (!recursiveStringOptional.isPresent() && recursiveStringTimesOptional.isPresent()
+                    || recursiveStringOptional.isPresent() && !recursiveStringTimesOptional.isPresent()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddAppCommand.MESSAGE_USAGE_RECURSIVELY));
+            }
             Appointment event = new Appointment(referenceId, timing, new Status());
             return new ReversibleActionPairCommand(new AddAppCommand(event),
                     new CancelAppCommand(event));
