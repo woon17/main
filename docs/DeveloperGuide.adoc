@@ -58,7 +58,7 @@ Each of the four components
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
-.Class Diagram of the Logic Component
+.Class Diagram of the Logic Component (todo: Update diagram)
 image::LogicClassDiagram.png[]
 
 [discrete]
@@ -114,9 +114,8 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `next 1` and `enqueue 001A` API call.
 
-.Interactions inside the Logic Component for the `enqueue 001A` Command.
+.Interactions inside the Logic Component for the `enqueue 001A` Command
 image::EnqueueSequenceDiagram.png[]
-
 
 .Interactions inside the Logic Component for the `next 1` Command
 image::NextSequenceDiagram.png[]
@@ -143,7 +142,7 @@ The `Model`,
 * consists of 3 sub-components: Queue Manager, Address Book and Appointment Book.
 * stores the details of patients and staff in an Address Book.
 * stores the Appointment details of patients and staff in an Appointment Book.
-* improves code reusability, we can reuse the `Person` class to derive classes which can represent patients or staff doctors.
+* improve code reusability, we can reuse the `Person` class to derive classes which can represent patients or staff doctors.
 * likewise, we can reuse the `Event` class to derive classes which can represent patient's appointments and staff duty shifts.
 * exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
