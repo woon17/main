@@ -198,8 +198,10 @@ public class ModelStub implements Model {
 
     @Override
     public boolean hasExactAppointment(Event event) {
-        throw new AssertionError("This method should not be called.");
+//        throw new AssertionError("This method should not be called.");
+        return true;
     }
+
 
     @Override
     public void deleteAppointment(Event event) {

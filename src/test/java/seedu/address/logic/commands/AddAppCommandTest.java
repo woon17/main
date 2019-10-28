@@ -1,4 +1,5 @@
 package seedu.address.logic.commands;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,6 +18,10 @@ import seedu.address.logic.commands.utils.ModelWithEventStub;
 import seedu.address.model.events.Event;
 import seedu.address.testutil.EventBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
+ * {@code AddAppCommand}.
+ */
 class AddAppCommandTest {
     @Test
     public void constructor_nullEvent_throwsNullPointerException() {
@@ -42,7 +47,6 @@ class AddAppCommandTest {
         AddAppCommand addAppCommand = new AddAppCommand(validEvent);
         ModelStub modelStub = new ModelWithEventStub(validEvent);
 
-        //assertCommandFailure(addCommand, modelStub, AddCommand.MESSAGE_DUPLICATE_EVENT);
         assertThrows(CommandException.class,
                 String.format(AddAppCommand.MESSAGE_DUPLICATE_EVENT, validEvent), () -> addAppCommand.execute(modelStub));
     }
