@@ -18,13 +18,13 @@ public class MissedEventPredicate implements Predicate<Event> {
     @Override
     public boolean test(Event event) {
         return event.getStatus().isMissed()
-            || (!event.getStatus().isSettled()
+                || (!event.getStatus().isSettled()
                 && event.getEventTiming().getEndTime().getTime().before(currentTime));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || other instanceof MissedEventPredicate; // instanceof handles nulls
+                || other instanceof MissedEventPredicate; // instanceof handles nulls
     }
 }

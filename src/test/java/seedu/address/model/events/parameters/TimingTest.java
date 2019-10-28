@@ -1,4 +1,4 @@
-package seedu.address.model.events;
+package seedu.address.model.events.parameters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.address.model.events.DateTime;
+import seedu.address.model.events.Timing;
 
 class TimingTest {
 

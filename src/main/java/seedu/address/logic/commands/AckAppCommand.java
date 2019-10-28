@@ -31,7 +31,7 @@ public class AckAppCommand extends ReversibleCommand {
 
 
     /**
-     * Creates an AckAppCommand to add the specified {@code Person}
+     * Creates an AckAppCommand to add the specified {@code Event}
      */
     public AckAppCommand(Event eventToEdit, Event editedEvent) {
         requireNonNull(eventToEdit);

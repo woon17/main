@@ -1,5 +1,6 @@
 package seedu.address.logic.commands.patients;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -11,7 +12,10 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.ChangeAppCommand;
 import seedu.address.logic.commands.DequeueCommand;
+import seedu.address.logic.commands.common.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
@@ -26,7 +30,7 @@ public class UnregisterPatientCommandTest {
     private Model model = TestUtil.getTypicalModelManager();
 
     @Test
-    public void execute_validUnfilteredList_success() {
+    public void execute_validUnfilteredList_success() throws CommandException {
         Person personToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
         UnregisterPatientCommand unregisterPatientCommand = new UnregisterPatientCommand(personToDelete);
 
@@ -37,13 +41,19 @@ public class UnregisterPatientCommandTest {
         ModelManager expectedModel = TestUtil.getTypicalModelManager();
 
         DequeueCommand removeFromQueueCommand = new DequeueCommand(personToDelete.getReferenceId());
-        String expectedMessage1 = String.format(DequeueCommand.MESSAGE_DEQUEUE_SUCCESS, personToDelete);
+        String expectedMessage1 = String.format(DequeueCommand.MESSAGE_DEQUEUE_SUCCESS,
+                personToDelete.getReferenceId());
         expectedModel.removeFromQueue(personToDelete.getReferenceId());
         assertCommandSuccess(removeFromQueueCommand, model, expectedMessage1, expectedModel);
 
-        String expectedMessage2 = String.format(UnregisterPatientCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage2 = String.format(UnregisterPatientCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                personToDelete);
         expectedModel.deletePerson(personToDelete);
-        assertCommandSuccess(unregisterPatientCommand, model, expectedMessage2, expectedModel);
+
+        CommandResult commandResult = unregisterPatientCommand.execute(model);
+        assertEquals(expectedMessage2, commandResult.getFeedbackToUser());
+//        new ChangeAppCommand(eventChanged, eventToChange).execute(model);
+//        assertCommandSuccess(unregisterPatientCommand, model, expectedMessage2, expectedModel);
     }
 
     @Test
@@ -53,7 +63,7 @@ public class UnregisterPatientCommandTest {
         UnregisterPatientCommand unregisterPatientCommand = new UnregisterPatientCommand(personToDelete);
 
         assertCommandFailure(unregisterPatientCommand, model,
-            String.format(Messages.MESSAGE_PERSON_NOT_FOUND, personToDelete));
+                String.format(Messages.MESSAGE_PERSON_NOT_FOUND, personToDelete));
     }
 
     @Test
