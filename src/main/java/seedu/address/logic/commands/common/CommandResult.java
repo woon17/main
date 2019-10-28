@@ -1,13 +1,13 @@
 package seedu.address.logic.commands.common;
 
-import seedu.address.logic.commands.AddAppCommand;
-import seedu.address.logic.commands.CancelAppCommand;
-import seedu.address.model.events.Event;
-
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
+
+import seedu.address.logic.commands.AddAppCommand;
+import seedu.address.logic.commands.CancelAppCommand;
+import seedu.address.model.events.Event;
 
 /**
  * Represents the result of a command execution.
@@ -57,7 +57,13 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
     }
-
+    /**
+     * Deals with input eventList and return a String message,
+     * eventList cannot be empty.
+     *
+     * @param eventList {@code List<Event>} which is the input eventList.
+     * @return string message of all events.
+     */
     public String listToString(List<Event> eventList) {
         requireNonNull(requestCommand);
         String stringList = requestCommand.equals(CancelAppCommand.COMMAND_WORD)
