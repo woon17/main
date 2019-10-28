@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.AppointmentBook;
+import seedu.address.model.person.AddressBook;
+import seedu.address.model.events.AppointmentBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.queue.QueueManager;
 
@@ -108,6 +108,13 @@ public class TypicalPersons {
      * Returns an {@code AppointmentBook} with all the typical appointments.
      */
     public static AppointmentBook getTypicalAppointmentBook() {
+        return new AppointmentBook();
+    }
+
+    /**
+     * Returns an {@code AppointmentBook} with all the typical Duty Roster.
+     */
+    public static AppointmentBook getTypicalDutyRosterBook() {
         return new AppointmentBook();
     }
 }

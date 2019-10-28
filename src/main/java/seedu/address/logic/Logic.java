@@ -1,3 +1,4 @@
+//@@author SakuraBlossom
 package seedu.address.logic;
 
 import java.nio.file.Path;
@@ -10,11 +11,8 @@ import seedu.address.commons.core.OmniPanelTab;
 import seedu.address.logic.commands.common.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyAppointmentBook;
-import seedu.address.model.common.ReferenceId;
-import seedu.address.model.common.ReferenceIdResolver;
+import seedu.address.model.ReferenceId;
+import seedu.address.model.ReferenceIdResolver;
 import seedu.address.model.events.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.queue.Room;
@@ -31,25 +29,35 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException   If an error occurs during parsing.
      */
-    CommandResult execute(String commandText, Consumer<OmniPanelTab> omniPanelTabConsumer) throws CommandException,
+    CommandResult execute(String commandText) throws CommandException,
         ParseException;
 
     /**
-     * Returns an unmodifiable view of the filtered list of persons
+     * Returns an unmodifiable view of the filtered list of patients
      */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Person> getFilteredPatientList();
 
     /**
-     * Returns an unmodifiable view of the filtered list of events
+     * Returns an unmodifiable view of the filtered list of appointments
      */
-    ObservableList<Event> getFilteredEventList();
+    ObservableList<Event> getFilteredAppointmentList();
 
     /**
-     * Returns the AddressBook.
+     * Returns an unmodifiable view of the filtered list of staff members
+     */
+    ObservableList<Person> getFilteredStaffList();
+
+    /**
+     * Returns an unmodifiable view of the filtered list of duty shifts
+     */
+    ObservableList<Event> getFilteredDutyShiftList();
+
+    /**
+     * Updates AutoComplete to the current command text.
      *
-     * @see Model#getAddressBook()
+     * @param commandText The command as entered by the user.
      */
-    ReadOnlyAddressBook getAddressBook();
+    //AutoCompleter updateAutoCompleter(String commandText);
 
     /**
      * Returns the a resolver class for mapping {@code ReferenceId} to {@code Person}.
@@ -72,18 +80,6 @@ public interface Logic {
     Path getAddressBookFilePath();
 
     /**
-     * Returns the Appointment Book.
-     *
-     * @see Model#getAppointmentBook()
-     */
-    ReadOnlyAppointmentBook getAppointmentBook();
-
-    /**
-     * Returns the user prefs' appointment book file path.
-     */
-    Path getAppointmentBookFilePath();
-
-    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
@@ -93,4 +89,8 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    /**
+     * Binds the OmniPanel tab selector.
+     */
+    void bindOmniPanelTabConsumer(Consumer<OmniPanelTab> omniPanelTabConsumer);
 }

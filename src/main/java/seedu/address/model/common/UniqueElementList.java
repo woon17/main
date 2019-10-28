@@ -1,3 +1,4 @@
+//@@author SakuraBlossom
 package seedu.address.model.common;
 
 import static java.util.Objects.requireNonNull;
@@ -88,6 +89,10 @@ public class UniqueElementList<T extends Identical> implements Iterable<T> {
         if (!internalList.remove(toRemove)) {
             throw new EntryNotFoundException();
         }
+    }
+
+    public T get(int index) {
+        return internalList.get(index);
     }
 
     public void setAll(UniqueElementList replacement) {

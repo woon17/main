@@ -4,20 +4,19 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
 
-import seedu.address.model.QueueList;
-import seedu.address.model.RoomList;
-import seedu.address.model.common.ReferenceId;
+import seedu.address.model.ReferenceId;
+import seedu.address.model.common.UniqueElementList;
 
 /**
  * Manages the queue and rooms.
  */
 public class QueueManager {
     private QueueList queueList;
-    private RoomList roomList;
+    private UniqueElementList<Room> roomList;
 
     public QueueManager() {
         this.queueList = new QueueList();
-        this.roomList = new RoomList();
+        this.roomList = new UniqueElementList<>();
     }
 
     public QueueManager(QueueManager toBeCopied) {
@@ -31,7 +30,7 @@ public class QueueManager {
     public void resetData(QueueManager newData) {
         requireNonNull(newData);
         queueList.setIds(newData.getReferenceIdList());
-        roomList.setRooms(newData.getRoomList());
+        roomList.setAll(newData.getRoomList());
     }
 
 
@@ -41,9 +40,12 @@ public class QueueManager {
      * @param index of the room which a patient left
      */
     public void serveNext(int index) {
+
+
+
         ReferenceId id = queueList.getFirst();
         queueList.poll();
-        roomList.serve(index, id);
+        //roomList.serve(index, id);
     }
 
     /**
@@ -52,9 +54,9 @@ public class QueueManager {
      * @param index of the room which a patient was allocated
      */
     public void undoServeNext(int index) {
-        ReferenceId id = roomList.getCurrentlyServed(index);
-        queueList.addPatient(0, id);
-        roomList.removeCurrentPatient(index);
+        //ReferenceId id = roomList.get(index).getCurrentPatient();
+        //queueList.addPatient(0, id);
+        //roomList.remove(index);
     }
 
     public void addPatient(ReferenceId id) {
@@ -78,11 +80,7 @@ public class QueueManager {
     }
 
     public void addRoom(Room room) {
-        roomList.addRoom(room);
-    }
-
-    public void addRoomToIndex(Room room, int indexOfRoom) {
-        roomList.addRoom(room, indexOfRoom);
+        roomList.add(room);
     }
 
     public boolean hasId(ReferenceId id) {
@@ -90,15 +88,15 @@ public class QueueManager {
     }
 
     public void removeRoom(Room target) {
-        roomList.removeRoom(target);
+        roomList.remove(target);
     }
 
     public boolean hasRoom(Room room) {
-        return roomList.hasRoom(room);
+        return roomList.contains(room);
     }
 
     public ReferenceId getCurrentlyServed(int index) {
-        return roomList.getCurrentlyServed(index);
+        return roomList.get(index).getCurrentPatient().get();
     }
 
     public void setRoom(Room target, Room editedRoom) {
@@ -112,7 +110,7 @@ public class QueueManager {
     }
 
     public ObservableList<Room> getRoomList() {
-        return roomList.getRoomList();
+        return roomList.asUnmodifiableObservableList();
     }
 
     public int getSizeOfQueue() {

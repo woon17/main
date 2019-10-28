@@ -21,7 +21,7 @@ import seedu.address.logic.commands.CancelAppCommand;
 import seedu.address.logic.commands.common.ReversibleActionPairCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.common.ReferenceId;
+import seedu.address.model.ReferenceId;
 import seedu.address.model.events.Appointment;
 import seedu.address.model.events.Event;
 import seedu.address.model.events.Status;
@@ -54,7 +54,7 @@ public class AddAppCommandParser implements Parser<ReversibleActionPairCommand> 
         }
 
         ReferenceId referenceId = ParserUtil.parsePatientReferenceId(argMultimap.getValue(PREFIX_ID).get());
-        if (!model.hasPerson(referenceId)) {
+        if (!model.hasPatient(referenceId)) {
             throw new ParseException(String.format(MESSAGE_INVALID_REFERENCEID, AddAppCommand.MESSAGE_USAGE));
         }
 

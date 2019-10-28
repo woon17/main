@@ -12,10 +12,10 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAppointmentBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.person.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.common.ReferenceId;
+import seedu.address.model.ReferenceId;
 import seedu.address.model.queue.QueueManager;
 import seedu.address.model.userprefs.UserPrefs;
 
@@ -25,8 +25,7 @@ import seedu.address.model.userprefs.UserPrefs;
  */
 public class DequeueCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), new QueueManager(),
-            getTypicalAppointmentBook());
+    private Model model = new ModelManager();
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -39,8 +38,7 @@ public class DequeueCommandTest {
 
         String expectedMessage = String.format(DequeueCommand.MESSAGE_DEQUEUE_SUCCESS, personToDelete);
 
-        ModelManager expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), new QueueManager(),
-            getTypicalAppointmentBook());
+        ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(ALICE);
         expectedModel.addPerson(BENSON);
         expectedModel.enqueuePatient(BENSON.getReferenceId());
