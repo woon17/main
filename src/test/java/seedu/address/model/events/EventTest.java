@@ -7,6 +7,8 @@ import static seedu.address.testutil.TypicalEvents.EVENT_ALICE;
 import static seedu.address.testutil.TypicalEvents.EVENT_BENSON;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.model.events.parameters.Status;
+import seedu.address.model.events.parameters.Timing;
 import seedu.address.model.person.parameters.PatientReferenceId;
 import seedu.address.testutil.EventBuilder;
 

@@ -2,13 +2,12 @@ package seedu.address.model.events.parameters;
 
 import static seedu.address.testutil.TypicalEvents.EVENT_ALICE;
 import static seedu.address.testutil.TypicalEvents.EVENT_BENSON;
-import static seedu.address.model.events.Status.APPROVED_MESS;
-import static seedu.address.model.events.Status.SETTLE_MESS;
-import static seedu.address.model.events.Status.MISSED_MESS;
+import static seedu.address.model.events.parameters.Status.APPROVED_MESS;
+import static seedu.address.model.events.parameters.Status.SETTLE_MESS;
+import static seedu.address.model.events.parameters.Status.MISSED_MESS;
 
 import org.junit.jupiter.api.Test;
 import seedu.address.model.events.Event;
-import seedu.address.model.events.Status;
 import seedu.address.testutil.EventBuilder;
 
 import static org.junit.jupiter.api.Assertions.*;

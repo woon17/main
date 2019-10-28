@@ -4,12 +4,11 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.ReferenceId;
-import seedu.address.model.events.DateTime;
+import seedu.address.model.events.parameters.DateTime;
 import seedu.address.model.events.Event;
-import seedu.address.model.events.Status;
-import seedu.address.model.events.Timing;
+import seedu.address.model.events.parameters.Status;
+import seedu.address.model.events.parameters.Timing;
 import seedu.address.model.person.parameters.PatientReferenceId;
 
 /**
