@@ -36,7 +36,8 @@ public class EditPatientDetailsCommandTest {
         EditPatientDetailsCommand editPatientDetailsCommand = new EditPatientDetailsCommand(personToEdit, BOB);
 
         Model expectedModel = TestUtil.getTypicalModelManager();
-        expectedModel.setPerson(personToEdit, BOB);
+        expectedModel.setPatient(personToEdit, BOB);
+        expectedModel.changePatientRefIdInQueue(personToEdit.getReferenceId(), BOB.getReferenceId());
         String expectedMessage = String.format(EditPatientDetailsCommand.MESSAGE_EDIT_PERSON_SUCCESS, BOB);
 
         assertCommandSuccess(editPatientDetailsCommand, model, expectedMessage, expectedModel);
@@ -51,7 +52,7 @@ public class EditPatientDetailsCommandTest {
         EditPatientDetailsCommand editPatientDetailsCommand = new EditPatientDetailsCommand(personToEdit, editedPerson);
 
         Model expectedModel = TestUtil.getTypicalModelManager();
-        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.setPatient(personToEdit, editedPerson);
         String expectedMessage = String.format(EditPatientDetailsCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         assertCommandSuccess(editPatientDetailsCommand, model, expectedMessage, expectedModel);
@@ -73,7 +74,7 @@ public class EditPatientDetailsCommandTest {
         String expectedMessage = String.format(EditPatientDetailsCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = TestUtil.getTypicalModelManager();
-        expectedModel.setPerson(lastPerson, editedPerson);
+        expectedModel.setPatient(lastPerson, editedPerson);
 
         assertCommandSuccess(editPatientDetailsCommand, model, expectedMessage, expectedModel);
     }
@@ -98,7 +99,7 @@ public class EditPatientDetailsCommandTest {
         String expectedMessage = String.format(EditPatientDetailsCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = TestUtil.getTypicalModelManager();
-        expectedModel.setPerson(personInFilteredList, editedPerson);
+        expectedModel.setPatient(personInFilteredList, editedPerson);
 
         assertCommandSuccess(editPatientDetailsCommand, model, expectedMessage, expectedModel);
     }
@@ -120,8 +121,10 @@ public class EditPatientDetailsCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in address book
-        Person firstPersonInList = model.getPatientAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person secondPersonInList = model.getPatientAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person firstPersonInList = model.getPatientAddressBook()
+                .getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPersonInList = model.getPatientAddressBook()
+                .getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditPatientDetailsCommand editPatientDetailsCommand = new EditPatientDetailsCommand(
             firstPersonInList, secondPersonInList);
 

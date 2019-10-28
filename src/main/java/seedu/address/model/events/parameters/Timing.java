@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -20,19 +21,6 @@ public class Timing implements Comparable<Timing> {
 
     private final DateTime startTiming;
     private final DateTime endTiming;
-
-
-    /**
-     * Constructs a {@code Timing}.
-     *
-     * @param startTiming A valid dateTime describing the start of event.
-     */
-    public Timing(DateTime startTiming) {
-        requireAllNonNull(startTiming);
-        this.startTiming = startTiming;
-        this.endTiming = DateTime.plusAppointmentDuration(startTiming);
-        new Timing(this.startTiming, this.endTiming);
-    }
 
     /**
      * Constructs a {@code Timing}.
@@ -53,15 +41,14 @@ public class Timing implements Comparable<Timing> {
      */
     public static boolean isValidTiming(DateTime testStart, DateTime testEnd) {
         requireAllNonNull(testStart, testEnd);
-        return testStart.getTime().before(testEnd.getTime());
+        return testStart.getTime().isBefore(testEnd.getTime());
     }
 
     /**
      * Returns true if the start dateTime is before the end dateTime.
      */
     public static boolean isValidTimingFromCurrentTime(DateTime testStart, DateTime testEnd) {
-        Date current = new Date();
-        return isValidTiming(testStart, testEnd) && testStart.getTime().after(current);
+        return isValidTiming(testStart, testEnd) && testStart.getTime().isAfter(LocalDateTime.now());
     }
 
     public DateTime getStartTime() {
@@ -76,8 +63,7 @@ public class Timing implements Comparable<Timing> {
      * Returns true if the endtime is before current time.
      */
     public Boolean hasMissedTiming() {
-        Date current = new Date();
-        return getEndTime().getTime().before(current);
+        return getEndTime().getTime().isBefore(LocalDateTime.now());
     }
 
     /**
@@ -89,7 +75,6 @@ public class Timing implements Comparable<Timing> {
                 && getStartTime().before(other.getEndTime())
                 && other.getStartTime().before(getEndTime());
     }
-
     /**
      * gets another Timing object which is one day later from current one.
      *
@@ -101,7 +86,6 @@ public class Timing implements Comparable<Timing> {
         DateTime end = DateTime.plusOneDay(current.getEndTime());
         return new Timing(start, end);
     }
-
     /**
      * gets another Timing object which is one week later from current one.
      *
@@ -146,12 +130,12 @@ public class Timing implements Comparable<Timing> {
     @Override
     public int compareTo(Timing t) {
         requireNonNull(t);
-        int cmpStartTimingResult = t.getStartTime().compareTo(getStartTime());
+        int cmpStartTimingResult = getStartTime().compareTo(t.getStartTime());
         if (cmpStartTimingResult != 0) {
             return cmpStartTimingResult;
         }
 
-        return t.getEndTime().compareTo(getEndTime());
+        return getEndTime().compareTo(t.getEndTime());
     }
 
     @Override

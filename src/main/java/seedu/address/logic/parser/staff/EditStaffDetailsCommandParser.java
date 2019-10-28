@@ -50,8 +50,8 @@ public class EditStaffDetailsCommandParser implements Parser<ReversibleActionPai
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditStaffDetailsCommand.MESSAGE_USAGE), pe);
         }
-        EditPersonDescriptor editPersonDescriptor =
-                EditPatientDetailsCommandParser.createEditedPersonDescriptor(argMultimap);
+        EditPersonDescriptor editPersonDescriptor = EditPatientDetailsCommandParser
+                .createEditedPersonDescriptor(argMultimap);
         Person personToEdit = ParserUtil.getEntryFromList(lastShownList, index);
         Person editedPerson = EditPatientDetailsCommandParser.createEditedPerson(personToEdit, editPersonDescriptor);
 

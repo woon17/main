@@ -48,7 +48,7 @@ public class StorageManager implements Storage {
     }
 
     /**
-     * helper method to load UserPrefs.
+     * Loads {@code UserPrefs} from a saved file, if the file is not found, loads a default user settings.
      */
     private UserPrefs loadUserPrefs() {
         Path prefsFilePath = userPrefsStorage.getUserPrefsFilePath();

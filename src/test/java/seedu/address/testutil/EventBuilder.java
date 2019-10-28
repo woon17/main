@@ -5,8 +5,8 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import seedu.address.model.ReferenceId;
-import seedu.address.model.events.parameters.DateTime;
 import seedu.address.model.events.Event;
+import seedu.address.model.events.parameters.DateTime;
 import seedu.address.model.events.parameters.Status;
 import seedu.address.model.events.parameters.Timing;
 import seedu.address.model.person.parameters.PatientReferenceId;
@@ -46,7 +46,7 @@ public class EventBuilder {
     }
 
     /**
-     * Sets the {@code PatientReferenceId} of the {@code Person} that we are building.
+     * Sets the {@code ReferenceId} of the {@code Event} that we are building.
      */
     public EventBuilder withId(String id) {
         this.id = new PatientReferenceId(id);
@@ -66,13 +66,16 @@ public class EventBuilder {
                 .plusMonths(afterMonth)
                 .plusDays(afterDays)
                 .plusHours(afterHours)
-                .plusMinutes(afterMinutes);
+                .plusMinutes(afterMinutes)
+                .withSecond(0)
+                .withNano(0);
 
         LocalDateTime newEndLocalDateTime = newStartLocalDateTime.plusMinutes(durationInMinutes);
 
-        Date startDate = Date.from(newStartLocalDateTime.atZone(ZoneId.systemDefault()).toInstant());
-        Date endDate = Date.from(newEndLocalDateTime.atZone(ZoneId.systemDefault()).toInstant());
-        this.timing = new Timing(new DateTime(startDate), new DateTime(endDate));
+        this.timing = new Timing(
+                DateTime.FromLocalDateTime(newStartLocalDateTime),
+                DateTime.FromLocalDateTime(newEndLocalDateTime));
+
         return this;
     }
 

@@ -77,7 +77,7 @@ public class Status {
         }
     }
 
-    public AppointmentStatuses getEnumSta() {
+    public AppointmentStatuses getSta() {
         return this.status;
     }
 
@@ -87,9 +87,9 @@ public class Status {
             return true;
         } else if (o instanceof Status) {
             Status otherStatus = (Status) o;
-            return otherStatus.getEnumSta().equals(this.getEnumSta());
+            return otherStatus.getSta().equals(this.getSta());
         } else if (o instanceof AppointmentStatuses) {
-            return getEnumSta().equals((AppointmentStatuses) o);
+            return getSta().equals((AppointmentStatuses) o);
         }
 
         return false;

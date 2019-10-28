@@ -1,4 +1,5 @@
 package seedu.address.ui;
+
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.util.HashSet;

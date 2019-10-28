@@ -1,21 +1,23 @@
 package seedu.address.model.queue;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import javafx.collections.ObservableList;
 
 import seedu.address.model.ReferenceId;
 import seedu.address.model.common.UniqueElementList;
+import seedu.address.model.person.UniqueReferenceIdList;
 
 /**
  * Manages the queue and rooms.
  */
 public class QueueManager {
-    private QueueList queueList;
+    private UniqueReferenceIdList queueList;
     private UniqueElementList<Room> roomList;
 
     public QueueManager() {
-        this.queueList = new QueueList();
+        this.queueList = new UniqueReferenceIdList();
         this.roomList = new UniqueElementList<>();
     }
 
@@ -40,9 +42,6 @@ public class QueueManager {
      * @param index of the room which a patient left
      */
     public void serveNext(int index) {
-
-
-
         ReferenceId id = queueList.getFirst();
         queueList.poll();
         //roomList.serve(index, id);
@@ -60,31 +59,36 @@ public class QueueManager {
     }
 
     public void addPatient(ReferenceId id) {
-        queueList.addPatient(id);
+        queueList.add(id);
     }
 
     public void addPatient(int index, ReferenceId id) {
-        queueList.addPatient(index, id);
+        queueList.add(index, id);
     }
 
     public void removePatient(ReferenceId id) {
-        queueList.removePatient(id);
+        queueList.remove(id);
     }
 
     public void removePatient(int index) {
-        queueList.removePatient(index);
+        queueList.remove(index);
     }
 
     public void poll() {
-        queueList.removePatient(0);
-    }
-
-    public void addRoom(Room room) {
-        roomList.add(room);
+        queueList.remove(0);
     }
 
     public boolean hasId(ReferenceId id) {
-        return queueList.hasId(id);
+        return queueList.contains(id);
+    }
+
+    public void setPatientInQueue(ReferenceId target, ReferenceId editedId) {
+        queueList.setPerson(target, editedId);
+    }
+
+
+    public void addRoom(Room room) {
+        roomList.add(room);
     }
 
     public void removeRoom(Room target) {
@@ -101,12 +105,11 @@ public class QueueManager {
 
     public void setRoom(Room target, Room editedRoom) {
         requireNonNull(editedRoom);
-
         roomList.set(target, editedRoom);
     }
 
     public ObservableList<ReferenceId> getReferenceIdList() {
-        return queueList.getReferenceIdList();
+        return queueList.asUnmodifiableObservableList();
     }
 
     public ObservableList<Room> getRoomList() {

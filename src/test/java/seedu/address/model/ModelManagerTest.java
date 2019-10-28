@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalEvents.getTypicalAppointmentBook;
 import static seedu.address.testutil.TypicalEvents.getTypicalDutyRosterBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalPatientAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalQueueManager;
 
 import java.nio.file.Paths;
@@ -89,7 +88,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson((Person) null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasPatient((Person) null));
     }
 
     @Test
@@ -99,14 +98,14 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+        assertFalse(modelManager.hasPatient(ALICE));
         assertFalse(modelManager.hasPatient(ALICE.getReferenceId()));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+        modelManager.addPatient(ALICE);
+        assertTrue(modelManager.hasPatient(ALICE));
         assertTrue(modelManager.hasPatient(ALICE.getReferenceId()));
     }
 

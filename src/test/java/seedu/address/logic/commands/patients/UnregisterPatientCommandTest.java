@@ -59,7 +59,7 @@ public class UnregisterPatientCommandTest {
     @Test
     public void execute_invalidUnfilteredList_throwsCommandException() {
         Person personToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
-        model.deletePerson(personToDelete);
+        model.deletePatient(personToDelete);
         UnregisterPatientCommand unregisterPatientCommand = new UnregisterPatientCommand(personToDelete);
 
         assertCommandFailure(unregisterPatientCommand, model,
