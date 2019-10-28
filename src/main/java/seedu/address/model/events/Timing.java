@@ -1,3 +1,4 @@
+//@@author woon17
 package seedu.address.model.events;
 
 import static java.util.Objects.requireNonNull;
@@ -29,7 +30,7 @@ public class Timing implements Comparable<Timing> {
     public Timing(DateTime startTiming) {
         requireAllNonNull(startTiming);
         this.startTiming = startTiming;
-        this.endTiming =  DateTime.plusAppointmentDuration(startTiming);
+        this.endTiming = DateTime.plusAppointmentDuration(startTiming);
         new Timing(this.startTiming, this.endTiming);
     }
 
@@ -88,6 +89,7 @@ public class Timing implements Comparable<Timing> {
                 && getStartTime().before(other.getEndTime())
                 && other.getStartTime().before(getEndTime());
     }
+
     /**
      * gets another Timing object which is one day later from current one.
      *
@@ -99,6 +101,7 @@ public class Timing implements Comparable<Timing> {
         DateTime end = DateTime.plusOneDay(current.getEndTime());
         return new Timing(start, end);
     }
+
     /**
      * gets another Timing object which is one week later from current one.
      *

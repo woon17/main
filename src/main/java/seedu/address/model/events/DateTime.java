@@ -1,3 +1,4 @@
+//@@author woon17
 package seedu.address.model.events;
 
 import static java.util.Objects.requireNonNull;
@@ -51,6 +52,7 @@ public class DateTime implements Comparable<DateTime> {
         }
         return parsedDateTime;
     }
+
     /**
      * gets another DateTime object which is one day later from current one.
      *
@@ -60,7 +62,8 @@ public class DateTime implements Comparable<DateTime> {
     public static DateTime plusAppointmentDuration(DateTime current) {
         LocalDateTime currenLocalDateTime = LocalDateTime.ofInstant(current.getTime().toInstant(),
                 ZoneId.systemDefault());
-        Date currentDate = Date.from(currenLocalDateTime.plusMinutes(Appointment.DURATION).atZone(ZoneId.systemDefault()).toInstant());
+        Date currentDate = Date.from(currenLocalDateTime.plusMinutes(Appointment.APPOINTMENT_DURATION)
+                .atZone(ZoneId.systemDefault()).toInstant());
         return new DateTime(currentDate);
     }
 

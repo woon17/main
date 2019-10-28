@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -129,8 +130,8 @@ public class MainApp extends Application {
         QueueManager queueManager = new QueueManager();
 
         return new ModelManager(initialPatientAddressData, initialStaffAddressData,
-            initialAppointmentData, initialDutyRosterData,
-            userPrefs, queueManager);
+                initialAppointmentData, initialDutyRosterData,
+                userPrefs, queueManager);
     }
 
     private void initLogging(Config config) {

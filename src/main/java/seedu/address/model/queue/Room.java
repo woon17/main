@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
 
-import seedu.address.model.common.Identical;
 import seedu.address.model.ReferenceId;
+import seedu.address.model.common.Identical;
 
 /**
  * Represents a consultation room involving a single doctor and an optional patient.
@@ -49,7 +49,7 @@ public class Room implements Identical<Room> {
     public boolean isSameAs(Room other) {
         requireNonNull(other);
         return other == this // short circuit if same object
-            || doctor.equals(other.doctor);
+                || doctor.equals(other.doctor);
     }
 
     @Override

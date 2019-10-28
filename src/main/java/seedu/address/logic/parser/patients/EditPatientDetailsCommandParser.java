@@ -63,15 +63,15 @@ public class EditPatientDetailsCommandParser implements Parser<ReversibleActionP
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditPatientDetailsCommand.MESSAGE_USAGE), pe);
+                    EditPatientDetailsCommand.MESSAGE_USAGE), pe);
         }
         EditPersonDescriptor editPersonDescriptor = createEditedPersonDescriptor(argMultimap);
         Person personToEdit = ParserUtil.getEntryFromList(lastShownList, index);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         return new ReversibleActionPairCommand(
-            new EditPatientDetailsCommand(personToEdit, editedPerson),
-            new EditPatientDetailsCommand(editedPerson, personToEdit));
+                new EditPatientDetailsCommand(personToEdit, editedPerson),
+                new EditPatientDetailsCommand(editedPerson, personToEdit));
     }
 
     /**
@@ -94,13 +94,14 @@ public class EditPatientDetailsCommandParser implements Parser<ReversibleActionP
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public static EditPersonDescriptor createEditedPersonDescriptor(ArgumentMultimap argMultimap) throws ParseException {
+    public static EditPersonDescriptor createEditedPersonDescriptor(ArgumentMultimap argMultimap)
+            throws ParseException {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             editPersonDescriptor.setReferenceId(
-                ParserUtil.parseStaffReferenceId(argMultimap.getValue(PREFIX_ID).get()));
+                    ParserUtil.parseStaffReferenceId(argMultimap.getValue(PREFIX_ID).get()));
         }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));

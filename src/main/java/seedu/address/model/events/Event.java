@@ -1,3 +1,4 @@
+//@@author woon17
 package seedu.address.model.events;
 
 import static java.util.Objects.requireNonNull;
@@ -5,8 +6,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.common.Identical;
 import seedu.address.model.ReferenceId;
+import seedu.address.model.common.Identical;
 
 /**
  * Represents an event involving a single Person.

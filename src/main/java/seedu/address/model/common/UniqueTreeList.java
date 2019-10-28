@@ -21,13 +21,18 @@ apache/commons/collections4/list/TreeList.java"/> with several modifications.
  */
 public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
 
-    /** The root node in the AVL tree */
+    /**
+     * The root node in the AVL tree
+     */
     private AvlNode<E> root;
 
-    /** The current size of the list */
+    /**
+     * The current size of the list
+     */
     private int size;
 
     //-----------------------------------------------------------------------
+
     /**
      * Constructs a new empty list.
      */
@@ -79,6 +84,9 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
         return root.indexOf((Identical) o, root.relativePosition);
     }
 
+    /**
+     * The indexOfUpperBound int value.
+     */
     public int indexOfUpperBound(Object o) {
         if (root == null || !(o instanceof Identical)) {
             return -1;
@@ -86,6 +94,9 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
         return root.indexOfUpperBound((Identical) o, root.relativePosition);
     }
 
+    /**
+     * The indexOfLowerBound int value.
+     */
     public int indexOfLowerBound(Object o) {
         if (root == null || !(o instanceof Identical)) {
             return -1;
@@ -121,7 +132,7 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
         }
         size++;
         return true;
-}
+    }
 
     @Override
     public boolean addAll(final Collection<? extends E> c) {
@@ -165,12 +176,13 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
     }
 
     //-----------------------------------------------------------------------
+
     /**
      * Checks whether the index is valid.
      *
-     * @param index  the index to check
-     * @param startIndex  the first allowed index
-     * @param endIndex  the last allowed index
+     * @param index      the index to check
+     * @param startIndex the first allowed index
+     * @param endIndex   the last allowed index
      * @throws IndexOutOfBoundsException if the index is invalid
      */
     private void checkInterval(final int index, final int startIndex, final int endIndex) {
@@ -180,6 +192,7 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
     }
 
     //-----------------------------------------------------------------------
+
     /**
      * Implements an AVLNode which keeps the offset updated.
      * <p>
@@ -193,28 +206,42 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
      * to indicate if they are a child (false) or a link as in linked list (true).
      */
     static class AvlNode<E extends Identical> {
-        /** The left child node or the predecessor if {@link #leftIsPrevious}.*/
+        /**
+         * The left child node or the predecessor if {@link #leftIsPrevious}.
+         */
         private AvlNode<E> left;
-        /** Flag indicating that left reference is not a subtree but the predecessor. */
+        /**
+         * Flag indicating that left reference is not a subtree but the predecessor.
+         */
         private boolean leftIsPrevious;
-        /** The right child node or the successor if {@link #rightIsNext}. */
+        /**
+         * The right child node or the successor if {@link #rightIsNext}.
+         */
         private AvlNode<E> right;
-        /** Flag indicating that right reference is not a subtree but the successor. */
+        /**
+         * Flag indicating that right reference is not a subtree but the successor.
+         */
         private boolean rightIsNext;
-        /** How many levels of left/right are below this one. */
+        /**
+         * How many levels of left/right are below this one.
+         */
         private int height;
-        /** The relative position, root holds absolute position. */
+        /**
+         * The relative position, root holds absolute position.
+         */
         private int relativePosition;
-        /** The stored element. */
+        /**
+         * The stored element.
+         */
         private E value;
 
         /**
          * Constructs a new node with a relative position.
          *
-         * @param relativePosition  the relative position of the node
-         * @param obj  the value for the node
-         * @param rightFollower the node with the value following this one
-         * @param leftFollower the node with the value leading this one
+         * @param relativePosition the relative position of the node
+         * @param obj              the value for the node
+         * @param rightFollower    the node with the value following this one
+         * @param leftFollower     the node with the value leading this one
          */
         private AvlNode(final int relativePosition, final E obj,
                         final AvlNode<E> rightFollower, final AvlNode<E> leftFollower) {
@@ -238,7 +265,7 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
         /**
          * Sets the value.
          *
-         * @param obj  the value to store
+         * @param obj the value to store
          */
         void setValue(final E obj) {
             this.value = obj;
@@ -310,6 +337,9 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
             return index;
         }
 
+        /**
+         * The indexOfLowerBound int value.
+         */
         public int indexOfLowerBound(Identical<E> element, final int index) {
             if (value == null) {
                 return -1;
@@ -427,6 +457,7 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
         }
 
         //-----------------------------------------------------------------------
+
         /**
          * Gets the left node, returning null if its a faedelung.
          */
@@ -459,7 +490,7 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
          * Removes the node at a given position.
          *
          * @param index is the index of the element to be removed relative to the position of
-         * the parent node of the current node.
+         *              the parent node of the current node.
          */
         AvlNode<E> remove(int index) {
             final int indexRelativeToMe = index - relativePosition;
@@ -567,26 +598,27 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
         }
 
         //-----------------------------------------------------------------------
+
         /**
          * Balances according to the AVL algorithm.
          */
         private AvlNode<E> balance() {
             switch (heightRightMinusLeft()) {
-            case 1 :
-            case 0 :
-            case -1 :
+            case 1:
+            case 0:
+            case -1:
                 return this;
-            case -2 :
+            case -2:
                 if (left.heightRightMinusLeft() > 0) {
                     setLeft(left.rotateLeft(), null);
                 }
                 return rotateRight();
-            case 2 :
+            case 2:
                 if (right.heightRightMinusLeft() < 0) {
                     setRight(right.rotateRight(), null);
                 }
                 return rotateLeft();
-            default :
+            default:
                 throw new IllegalStateException("tree inconsistent!");
             }
         }
@@ -618,8 +650,8 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
          */
         private void recalcHeight() {
             height = Math.max(
-                getLeftSubTree() == null ? -1 : getLeftSubTree().height,
-                getRightSubTree() == null ? -1 : getRightSubTree().height) + 1;
+                    getLeftSubTree() == null ? -1 : getLeftSubTree().height,
+                    getRightSubTree() == null ? -1 : getRightSubTree().height) + 1;
         }
 
         /**
@@ -679,8 +711,8 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
         /**
          * Sets the left field to the node, or the previous node if that is null
          *
-         * @param node  the new left subtree node
-         * @param previous  the previous node in the linked list
+         * @param node     the new left subtree node
+         * @param previous the previous node in the linked list
          */
         private void setLeft(final AvlNode<E> node, final AvlNode<E> previous) {
             leftIsPrevious = (node == null);
@@ -691,8 +723,8 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
         /**
          * Sets the right field to the node, or the next node if that is null
          *
-         * @param node  the new left subtree node
-         * @param next  the next node in the linked list
+         * @param node the new left subtree node
+         * @param next the next node in the linked list
          */
         private void setRight(final AvlNode<E> node, final AvlNode<E> next) {
             rightIsNext = (node == null);
@@ -706,18 +738,18 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
         @Override
         public String toString() {
             return new StringBuilder()
-                .append("AVLNode(")
-                .append(relativePosition)
-                .append(',')
-                .append(left != null)
-                .append(',')
-                .append(value)
-                .append(',')
-                .append(getRightSubTree() != null)
-                .append(", faedelung ")
-                .append(rightIsNext)
-                .append(" )")
-                .toString();
+                    .append("AVLNode(")
+                    .append(relativePosition)
+                    .append(',')
+                    .append(left != null)
+                    .append(',')
+                    .append(value)
+                    .append(',')
+                    .append(getRightSubTree() != null)
+                    .append(", faedelung ")
+                    .append(rightIsNext)
+                    .append(" )")
+                    .toString();
         }
     }
 
@@ -725,7 +757,9 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
      * A list iterator over the linked list.
      */
     static class TreeListIterator<E extends Identical> implements ListIterator<E> {
-        /** The parent list */
+        /**
+         * The parent list
+         */
         private final UniqueTreeList<E> parent;
         /**
          * Cache of the next node that will be returned by {@link #next()}.
@@ -755,11 +789,11 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
         /**
          * Create a ListIterator for a list.
          *
-         * @param parent  the parent list
-         * @param fromIndex  the index to start at
+         * @param parent    the parent list
+         * @param fromIndex the index to start at
          */
         protected TreeListIterator(final UniqueTreeList<E> parent, final int fromIndex)
-            throws IndexOutOfBoundsException {
+                throws IndexOutOfBoundsException {
             super();
             this.parent = parent;
             this.expectedModCount = parent.modCount;
@@ -773,7 +807,7 @@ public class UniqueTreeList<E extends Identical> extends AbstractList<E> {
          * object expects.
          *
          * @throws ConcurrentModificationException If the list's modification
-         * count isn't the value that was expected.
+         *                                         count isn't the value that was expected.
          */
         protected void checkModCount() {
             if (parent.modCount != expectedModCount) {

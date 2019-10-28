@@ -1,8 +1,7 @@
 package seedu.address.ui;
-
-import java.awt.*;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.util.HashSet;
-import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -181,7 +180,7 @@ public class MainWindow extends UiPart<Stage> implements AutoComplete, OmniPanel
         tabBarPlaceholder.getChildren().add(tabBar.getRoot());
 
         queueListPanel = new QueueListPanel(logic.getConsultationRoomList(),
-            logic.getQueueList(), logic.getReferenceIdResolver());
+                logic.getQueueList(), logic.getReferenceIdResolver());
         queueListPanelPlaceholder.getChildren().add(queueListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -246,7 +245,7 @@ public class MainWindow extends UiPart<Stage> implements AutoComplete, OmniPanel
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-            (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();

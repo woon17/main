@@ -47,6 +47,9 @@ public class StorageManager implements Storage {
         this.userPrefs = loadUserPrefs();
     }
 
+    /**
+     * helper method to load UserPrefs.
+     */
     private UserPrefs loadUserPrefs() {
         Path prefsFilePath = userPrefsStorage.getUserPrefsFilePath();
         logger.info("Using prefs file : " + prefsFilePath);
@@ -56,7 +59,7 @@ public class StorageManager implements Storage {
             initialUserPrefs = userPrefsStorage.readUserPrefs().orElseThrow(() -> new IOException());
         } catch (DataConversionException e) {
             logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
-                + "Using default user prefs");
+                    + "Using default user prefs");
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
         }
@@ -109,7 +112,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyAddressBook> readPatientAddressBook()
-        throws DataConversionException, IOException {
+            throws DataConversionException, IOException {
         return patientAddressBookStorage.readAddressBook(getPatientAddressBookFilePath());
     }
 
@@ -121,7 +124,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyAppointmentBook> readPatientAppointmentBook()
-        throws DataConversionException, IOException {
+            throws DataConversionException, IOException {
         return patientAppointmentBookStorage.readAppointmentBook(getPatientAppointmentBookFilePath());
     }
 

@@ -1,3 +1,4 @@
+//@@author woon17
 package seedu.address.model.events;
 
 import seedu.address.model.ReferenceId;
@@ -7,7 +8,7 @@ import seedu.address.model.ReferenceId;
  * no need to relate to personName, instead of playing with personId
  */
 public class Appointment extends Event {
-    public static int DURATION = 30;
+    public static final int APPOINTMENT_DURATION = 30;
 
     /**
      * Every field must be present and not null.

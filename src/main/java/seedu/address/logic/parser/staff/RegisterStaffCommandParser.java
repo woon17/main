@@ -1,5 +1,13 @@
 package seedu.address.logic.parser.staff;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -19,14 +27,6 @@ import seedu.address.model.person.parameters.Address;
 import seedu.address.model.person.parameters.Email;
 import seedu.address.model.person.parameters.Name;
 import seedu.address.model.person.parameters.Phone;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -48,7 +48,7 @@ public class RegisterStaffCommandParser implements Parser<ReversibleActionPairCo
                 PREFIX_EMAIL, PREFIX_ADDRESS)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RegisterStaffCommand.MESSAGE_USAGE));
+                    RegisterStaffCommand.MESSAGE_USAGE));
         }
 
         ReferenceId referenceId = ParserUtil.parseStaffReferenceId(argMultimap.getValue(PREFIX_ID).get());
@@ -61,8 +61,8 @@ public class RegisterStaffCommandParser implements Parser<ReversibleActionPairCo
         Person person = new Person(referenceId, name, phone, email, address, tagList);
 
         return new ReversibleActionPairCommand(
-            new RegisterStaffCommand(person),
-            new UnregisterStaffCommand(person));
+                new RegisterStaffCommand(person),
+                new UnregisterStaffCommand(person));
     }
 
     /**
