@@ -27,6 +27,7 @@ class AckAppCommandTest {
         CommandResult commandResult = new AckAppCommand(eventToAcked, eventAcked).execute(model);
         assertEquals(String.format(AckAppCommand.MESSAGE_SUCCESS, eventAcked),
                 commandResult.getFeedbackToUser());
+        new AckAppCommand(eventAcked, eventToAcked).execute(model);
     }
 
     @Test

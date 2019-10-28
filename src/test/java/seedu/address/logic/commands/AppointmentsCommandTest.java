@@ -12,11 +12,11 @@ import seedu.address.testutil.TestUtil;
 import static org.junit.jupiter.api.Assertions.*;
 
 import seedu.address.commons.core.Messages;
+
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 
 import java.util.Collections;
-import java.util.List;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
@@ -65,14 +65,11 @@ class AppointmentsCommandTest {
 
     //    execute_zeroKeywords_noEventFound
     @Test
-    public void execute_zeroKeywords_noEventFound() {
+    public void execute_zeroKeywords_allEventsFound() {
         String expectedMessage = String.format(Messages.MESSAGE_ALL_EVENTS_LISTED_OVERVIEW,
                 model.getFilteredAppointmentList().size());
-//todo 1
-        ContainsKeywordsPredicate invalidPredicate = new ContainsKeywordsPredicate((List<String>) PREDICATE_SHOW_ALL_EVENTS);
-
-        AppointmentsCommand command = new AppointmentsCommand(invalidPredicate);
-        expectedModel.updateFilteredAppointmentList(invalidPredicate);
+        AppointmentsCommand command = new AppointmentsCommand(PREDICATE_SHOW_ALL_EVENTS);
+        expectedModel.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_EVENTS);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
