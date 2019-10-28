@@ -20,6 +20,19 @@ public class Timing implements Comparable<Timing> {
     private final DateTime startTiming;
     private final DateTime endTiming;
 
+
+    /**
+     * Constructs a {@code Timing}.
+     *
+     * @param startTiming A valid dateTime describing the start of event.
+     */
+    public Timing(DateTime startTiming) {
+        requireAllNonNull(startTiming);
+        this.startTiming = startTiming;
+        this.endTiming =  DateTime.plusAppointmentDuration(startTiming);
+        new Timing(this.startTiming, this.endTiming);
+    }
+
     /**
      * Constructs a {@code Timing}.
      *

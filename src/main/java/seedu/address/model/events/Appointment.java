@@ -7,6 +7,8 @@ import seedu.address.model.ReferenceId;
  * no need to relate to personName, instead of playing with personId
  */
 public class Appointment extends Event {
+    public static int DURATION = 30;
+
     /**
      * Every field must be present and not null.
      *

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURSIVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURSIVE_TIMES;
@@ -27,12 +26,10 @@ public class AddAppCommand extends ReversibleCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a appointment to the address book. "
             + "Parameters: "
             + PREFIX_ID + "REFERENCE ID "
-            + PREFIX_START + "PREFIX_EVENT "
-            + PREFIX_END + "PREFIX_EVENT \n"
+            + PREFIX_START + "PREFIX_EVENT\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "001A "
-            + PREFIX_START + "01/11/19 1800 "
-            + PREFIX_END + "01/11/19 1900";
+            + PREFIX_START + "01/11/19 1800";
 
     public static final String MESSAGE_USAGE_RECURSIVELY = COMMAND_WORD + ": Adds recursively appointment"
             + " to the address book. \n"
@@ -40,14 +37,12 @@ public class AddAppCommand extends ReversibleCommand {
             + PREFIX_ID + "REFERENCE ID "
             + "[" + PREFIX_RECURSIVE + "PREFIX_RECURSIVE w/m/y] "
             + "[" + PREFIX_RECURSIVE_TIMES + "PREFIX_RECURSIVE_TIMES] "
-            + PREFIX_START + "PREFIX_EVENT "
-            + PREFIX_END + "PREFIX_EVENT \n"
+            + PREFIX_START + "PREFIX_EVENT\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "001A "
             + PREFIX_RECURSIVE + "m "
             + PREFIX_RECURSIVE_TIMES + "2 "
-            + PREFIX_START + "01/11/19 1800 "
-            + PREFIX_END + "01/11/19 1900";
+            + PREFIX_START + "01/11/19 1800";
 
     public static final String MESSAGE_SUCCESS = "Appointment added: %1$s";
     public static final String MESSAGE_SUCCESS_RECURSIVE = " recusive Appointments were added";
