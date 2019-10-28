@@ -77,7 +77,7 @@ public class Event implements Identical<Event> {
 
     /**
      * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two events.
      */
     @Override
     public boolean equals(Object other) {
@@ -91,7 +91,8 @@ public class Event implements Identical<Event> {
 
         Event otherEvent = (Event) other;
         return otherEvent.getPersonId().equals(getPersonId())
-                && otherEvent.getEventTiming().equals(getEventTiming());
+                && otherEvent.getEventTiming().equals(getEventTiming())
+                && otherEvent.getStatus().equals(getStatus());
     }
 
     @Override

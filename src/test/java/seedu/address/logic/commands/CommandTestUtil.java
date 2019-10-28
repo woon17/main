@@ -42,6 +42,14 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static  final String VALID_TIMING_AMY = "10/10/19 1800";
+    public static  final String VALID_TIMING_BOB = "11/11/19 1800";
+    public static  final String VALID_STATUS_ANY = "SETTLED";
+    public static  final String VALID_STATUS_BOB = "MISSED";
+
+
+
+
     public static final String ID_DESC_AMY = " " + PREFIX_ID + VALID_ID_AMY;
     public static final String ID_DESC_BOB = " " + PREFIX_ID + VALID_ID_BOB;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -64,6 +72,8 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+
 
     public static final EditPersonDescriptor DESC_AMY;
     public static final EditPersonDescriptor DESC_BOB;
