@@ -2,15 +2,10 @@ package seedu.address.logic.commands;
 
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
-import static seedu.address.testutil.TypicalEvents.EVENT_BENSON;
-
 
 import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.common.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.utils.ModelAcceptingEventAddedStub;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.events.Event;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.TestUtil;
@@ -19,12 +14,11 @@ import seedu.address.testutil.TestUtil;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 class CancelAppCommandTest {
 
     private Model model = TestUtil.getTypicalModelManager();
+
     @Test
     public void constructor_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new CancelAppCommand((List<Event>) null));
