@@ -37,6 +37,18 @@ public class Timing implements Comparable<Timing> {
     }
 
     /**
+     * Constructs a {@code Timing}.
+     *
+     * @param startTiming A valid dateTime describing the start of event.
+     */
+    public Timing(DateTime startTiming) {
+        requireAllNonNull(startTiming);
+        this.startTiming = startTiming;
+        this.endTiming =  DateTime.plusHalfHour(startTiming);
+        new Timing(this.startTiming, this.endTiming);
+    }
+
+    /**
      * Returns true if the start dateTime is before the end dateTime.
      */
     public static boolean isValidTiming(DateTime testStart, DateTime testEnd) {
@@ -130,7 +142,7 @@ public class Timing implements Comparable<Timing> {
     @Override
     public int compareTo(Timing t) {
         requireNonNull(t);
-        int cmpStartTimingResult = getStartTime().compareTo(t.getStartTime());
+        int cmpStartTimingResult = t.getStartTime().compareTo(getStartTime());
         if (cmpStartTimingResult != 0) {
             return cmpStartTimingResult;
         }
