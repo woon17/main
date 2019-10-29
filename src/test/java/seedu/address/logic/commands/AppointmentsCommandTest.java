@@ -89,7 +89,7 @@ class AppointmentsCommandTest {
 
     @Test
     public void execute_validKeywords_eventsFound() {
-        Event validEvent = model.getFilteredAppointmentList().get(INDEX_FIRST_EVENT.getZeroBased());
+        Event validEvent = model.getFilteredAppointmentList().get(INDEX_SECOND_EVENT.getZeroBased());
 
         EventContainsRefIdPredicate validPredicate = new EventContainsRefIdPredicate(validEvent.getPersonId());
 

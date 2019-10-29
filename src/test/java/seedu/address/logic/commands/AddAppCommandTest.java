@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
+import static seedu.address.model.ModelManager.MESSAGE_NOT_OVERLAPPING_APPOINTMENT;
+import static seedu.address.testutil.TypicalEvents.EVENT_BENSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,14 +17,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.utils.ModelAcceptingEventAddedStub;
 import seedu.address.logic.commands.utils.ModelStub;
 import seedu.address.logic.commands.utils.ModelWithEventStub;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.events.Event;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.TestUtil;
 
-/**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code AddAppCommand}.
- */
 class AddAppCommandTest {
+    private Model model = TestUtil.getTypicalModelManager();
+
     @Test
     public void constructor_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddAppCommand((List<Event>) null));
@@ -31,24 +34,20 @@ class AddAppCommandTest {
 
     @Test
     public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
-        ModelAcceptingEventAddedStub modelStub = new ModelAcceptingEventAddedStub();
-        Event validEvent = new EventBuilder().build();
-
-        CommandResult commandResult = new AddAppCommand(validEvent).execute(modelStub);
-
-        assertEquals(String.format(AddAppCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, validEvent),
+        model.deleteAppointment(EVENT_BENSON);
+        CommandResult commandResult = new AddAppCommand(EVENT_BENSON).execute(model);
+        assertEquals(String.format(AddAppCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, EVENT_BENSON),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
     }
 
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
-        Event validEvent = new EventBuilder().build();
-        AddAppCommand addAppCommand = new AddAppCommand(validEvent);
-        ModelStub modelStub = new ModelWithEventStub(validEvent);
+        Event duplicateEventToadded = model.getFilteredAppointmentList().get(INDEX_FIRST_EVENT.getZeroBased());
+        AddAppCommand addapptCommand = new AddAppCommand(duplicateEventToadded);
 
         assertThrows(CommandException.class,
-                String.format(AddAppCommand.MESSAGE_DUPLICATE_EVENT, validEvent), () -> addAppCommand.execute(modelStub));
+                String.format(ModelManager.MESSAGE_NOT_OVERLAPPING_APPOINTMENT,
+                        duplicateEventToadded.getEventTiming().toString()), () -> addapptCommand.execute(model));
     }
 
     @Test

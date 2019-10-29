@@ -248,7 +248,7 @@ public class ModelStub implements Model {
     @Override
     public void updateFilteredAppointmentList(Predicate<Event> predicate) {
         //todo ask can i call this method as i need to use it
-//        throw new AssertionError("This method should not be called.");
+        throw new AssertionError("This method should not be called.");
 
     }
 
