@@ -75,9 +75,8 @@ public class AddAppCommand extends ReversibleCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-
         if (eventList == null) {
-            addOneEvent(model, toAdd);
+            model.scheduleAppointment(toAdd);
             model.updateFilteredAppointmentList(new EventContainsRefIdPredicate(toAdd.getPersonId()));
             return new CommandResult(String.format(MESSAGE_ADD_APPOINTMENT_SUCCESS, toAdd));
 
@@ -85,20 +84,10 @@ public class AddAppCommand extends ReversibleCommand {
 
         //TODO: Should it still add the other appointments if one fails?
         for (Event e : eventList) {
-            addOneEvent(model, e);
+            model.scheduleAppointment(e);
         }
         model.updateFilteredAppointmentList(new EventContainsRefIdPredicate(eventList.get(0).getPersonId()));
         return new CommandResult(AddAppCommand.COMMAND_WORD, eventList);
-    }
-
-    /**
-     * Adds a new event to the address book.
-     */
-    private void addOneEvent(Model model, Event eventToAdd) throws CommandException {
-        if (model.hasAppointment(eventToAdd)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_EVENT, eventToAdd));
-        }
-        model.addAppointment(eventToAdd);
     }
 
     @Override

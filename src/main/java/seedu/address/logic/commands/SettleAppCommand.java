@@ -54,7 +54,7 @@ public class SettleAppCommand extends ReversibleCommand {
 
             model.deleteAppointment(eventToEdit);
 
-            model.addAppointment(editedEvent);
+            model.scheduleAppointment(editedEvent);
             model.updateFilteredAppointmentList(new EventsMissedPredicate());
             //or model.updateToSettledEventList();
         }
