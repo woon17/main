@@ -55,11 +55,11 @@ class StatusTest {
 
     @Test
     void getEnumSta() {
-        assertTrue(EVENT_ALICE.getStatus().getEnumSta().equals(Status.AppointmentStatuses.APPROVED));
-        assertTrue(EVENT_BENSON.getStatus().getEnumSta().equals(Status.AppointmentStatuses.APPROVED));
+        assertTrue(EVENT_ALICE.getStatus().getSta().equals(Status.AppointmentStatuses.APPROVED));
+        assertTrue(EVENT_BENSON.getStatus().getSta().equals(Status.AppointmentStatuses.APPROVED));
 
-        assertFalse(EVENT_ALICE.getStatus().getEnumSta().equals(Status.AppointmentStatuses.MISSED));
-        assertFalse(EVENT_BENSON.getStatus().getEnumSta().equals(Status.AppointmentStatuses.SETTLED));
+        assertFalse(EVENT_ALICE.getStatus().getSta().equals(Status.AppointmentStatuses.MISSED));
+        assertFalse(EVENT_BENSON.getStatus().getSta().equals(Status.AppointmentStatuses.SETTLED));
     }
 
     @Test

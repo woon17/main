@@ -48,7 +48,7 @@ public class UnregisterPatientCommandTest {
 
         String expectedMessage2 = String.format(UnregisterPatientCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 personToDelete);
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deletePatient(personToDelete);
 
         CommandResult commandResult = unregisterPatientCommand.execute(model);
         assertEquals(expectedMessage2, commandResult.getFeedbackToUser());
