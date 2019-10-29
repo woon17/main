@@ -32,7 +32,7 @@ public class AddAppCommand extends ReversibleCommand {
             + PREFIX_ID + "001A "
             + PREFIX_START + "01/11/19 1800";
 
-    public static final String MESSAGE_USAGE_RECURSIVELY = COMMAND_WORD + ": Adds recursively appointment"
+    public static final String MESSAGE_USAGE_RECURSIVELY = COMMAND_WORD + ": Adds recursively appointments"
             + " to the address book. \n"
             + "Parameters: "
             + PREFIX_ID + "REFERENCE ID "
