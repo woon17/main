@@ -11,14 +11,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.model.common.Tag;
+import seedu.address.model.ReferenceId;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.parameters.Address;
 import seedu.address.model.person.parameters.Email;
 import seedu.address.model.person.parameters.Name;
-import seedu.address.model.person.parameters.PatientReferenceId;
-import seedu.address.model.person.parameters.PersonReferenceId;
 import seedu.address.model.person.parameters.Phone;
+import seedu.address.model.person.parameters.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -57,7 +56,7 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         id = source.getReferenceId().toString();
-        name = source.getName().fullName;
+        name = source.getName().toString();
         phone = source.getPhone().toString();
         email = source.getEmail().toString();
         address = source.getAddress().toString();
@@ -71,7 +70,7 @@ class JsonAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Person toModelType(boolean isStaff) throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -79,9 +78,11 @@ class JsonAdaptedPerson {
 
         if (id == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                PatientReferenceId.class.getSimpleName()));
+                ReferenceId.class.getSimpleName()));
         }
-        final PersonReferenceId modelReferenceId = ParserUtil.parsePatientReferenceId(id);
+        final ReferenceId modelReferenceId = isStaff
+                ? ParserUtil.parseStaffReferenceId(id)
+                : ParserUtil.parsePatientReferenceId(id);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));

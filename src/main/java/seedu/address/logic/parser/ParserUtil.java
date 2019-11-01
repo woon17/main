@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIMING_COMPARE_END;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIMING_COMPARE_NOW;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,17 +12,17 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.appointments.AddAppCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.common.Tag;
+import seedu.address.model.ReferenceId;
 import seedu.address.model.events.parameters.DateTime;
 import seedu.address.model.events.parameters.Timing;
 import seedu.address.model.person.parameters.Address;
 import seedu.address.model.person.parameters.Email;
 import seedu.address.model.person.parameters.Name;
-import seedu.address.model.person.parameters.PatientReferenceId;
 import seedu.address.model.person.parameters.PersonReferenceId;
 import seedu.address.model.person.parameters.Phone;
-import seedu.address.model.person.parameters.StaffReferenceId;
+import seedu.address.model.person.parameters.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -59,33 +61,23 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String refId} into an {@code StaffReferenceId}.
+     * Parses a {@code String refId} into an {@code ReferenceId}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code StaffReferenceId} is invalid.
+     * @throws ParseException if the given {@code ReferenceId} is invalid.
      */
-    public static StaffReferenceId parseStaffReferenceId(String staffRefId) throws ParseException {
-        requireNonNull(staffRefId);
-        String trimmedRefId = staffRefId.trim().toUpperCase();
-        if (!PersonReferenceId.isValidId(trimmedRefId)) {
-            throw new ParseException(PersonReferenceId.MESSAGE_CONSTRAINTS);
-        }
-        return new StaffReferenceId(trimmedRefId);
+    public static ReferenceId parseStaffReferenceId(String staffRefId) throws ParseException {
+        return PersonReferenceId.parseStaffReferenceId(staffRefId);
     }
 
     /**
-     * Parses a {@code String refId} into an {@code PatientReferenceId}.
+     * Parses a {@code String refId} into an {@code ReferenceId}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code PatientReferenceId} is invalid.
+     * @throws ParseException if the given {@code ReferenceId} is invalid.
      */
-    public static PatientReferenceId parsePatientReferenceId(String patientRefId) throws ParseException {
-        requireNonNull(patientRefId);
-        String trimmedRefId = patientRefId.trim().toUpperCase();
-        if (!PersonReferenceId.isValidId(trimmedRefId)) {
-            throw new ParseException(PersonReferenceId.MESSAGE_CONSTRAINTS);
-        }
-        return new PatientReferenceId(trimmedRefId);
+    public static ReferenceId parsePatientReferenceId(String patientRefId) throws ParseException {
+        return PersonReferenceId.parsePatientReferenceId(patientRefId);
     }
 
     /**
@@ -166,7 +158,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return Tag.issueTag(trimmedTag);
     }
 
     /**
@@ -188,14 +180,31 @@ public class ParserUtil {
      * @return the valid Appointment object.
      * @throws ParseException If an error occurs during command parsering.
      */
-    public static Timing parseTiming(String start) throws ParseException {
+    public static Timing parseTiming(String start, String end) throws ParseException {
         requireNonNull(start);
         DateTime startTiming = DateTime.tryParseSimpleDateFormat(start);
         if (startTiming == null) {
             throw new ParseException("The start " + DateTime.MESSAGE_CONSTRAINTS);
         }
+        if (end != null) {
+            DateTime endTiming = DateTime.tryParseSimpleDateFormat(end);
+            if (endTiming == null) {
+                throw new ParseException("The end " + DateTime.MESSAGE_CONSTRAINTS);
+            }
+            if (!Timing.isValidTimingFromCurrentTime(startTiming, endTiming)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_TIMING_COMPARE_NOW,
+                        AddAppCommand.MESSAGE_USAGE));
+            }
+
+            if (!Timing.isValidTiming(startTiming, endTiming)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_TIMING_COMPARE_END,
+                        AddAppCommand.MESSAGE_USAGE));
+            }
+            return new Timing(startTiming, endTiming);
+        }
         return new Timing(startTiming);
     }
+
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
