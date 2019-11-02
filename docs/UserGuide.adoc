@@ -382,7 +382,7 @@ Format: `redo`
 ** settle: `settle <ENTRY_ID>`
 
 * *Duty-shift Management* +
-** addshift: `addshift [-id STAFF_REFERENCE_ID] -start <START_TIMING> [-rec REPEATEDLY] [-num REPEATED_TIMES]`
+** addshift: `addshift [-id STAFF_REFERENCE_ID] -start <START_TIMING> -end <END_TIMING> [-rec REPEATEDLY] [-num REPEATED_TIMES]`
 ** cancelshift: `cancelshift <ENTRY_ID>`
 ** changeshift: `changeshift <ENTRY_ID> [-start <START_TIMING>]`
 

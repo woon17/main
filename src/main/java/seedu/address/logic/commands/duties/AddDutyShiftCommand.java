@@ -30,7 +30,7 @@ public class AddDutyShiftCommand extends ReversibleCommand {
     public static final String COMMAND_WORD = "addshift";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds duty shifts recursively "
-            + " to the duty roster. \n"
+            + "to the duty roster. \n"
             + "Parameters: "
             + PREFIX_ID + "REFERENCE ID "
             + PREFIX_START + "PREFIX_START "

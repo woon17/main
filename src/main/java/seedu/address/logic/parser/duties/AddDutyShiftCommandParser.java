@@ -26,6 +26,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReferenceId;
+import seedu.address.model.events.DutyEvent;
 import seedu.address.model.events.Event;
 import seedu.address.model.events.parameters.Status;
 import seedu.address.model.events.parameters.Timing;
@@ -53,7 +54,7 @@ public class AddDutyShiftCommandParser implements Parser<ReversibleActionPairCom
                 ArgumentTokenizer.tokenize(args, PREFIX_ID,
                         PREFIX_START, PREFIX_END, PREFIX_RECURSIVE, PREFIX_RECURSIVE_TIMES);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_START)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_START, PREFIX_END)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddDutyShiftCommand.MESSAGE_USAGE));
         }
@@ -66,12 +67,9 @@ public class AddDutyShiftCommandParser implements Parser<ReversibleActionPairCom
 
         String startString = argMultimap.getValue(PREFIX_START).get();
         Timing timing;
-        if (!arePrefixesPresent(argMultimap, PREFIX_END)) {
-            timing = ParserUtil.parseTiming(startString, null);
-        } else {
+
             String endString = argMultimap.getValue(PREFIX_END).get();
             timing = ParserUtil.parseTiming(startString, endString);
-        }
 
         Optional<String> recursiveStringOptional = argMultimap.getValue(PREFIX_RECURSIVE);
         Optional<String> recursiveStringTimesOptional = argMultimap.getValue(PREFIX_RECURSIVE_TIMES);
@@ -86,7 +84,7 @@ public class AddDutyShiftCommandParser implements Parser<ReversibleActionPairCom
 
             Index recursiveTimes = ParserUtil.parseTimes(recursiveStringTimesOptional.get());
             int times = recursiveTimes.getZeroBased() + 1;
-            Event event = new Event(referenceId, timing, new Status());
+            DutyEvent event = new DutyEvent(referenceId, timing, new Status());
             List<Event> eventList = getRecEvents(event, recursiveString, times);
             return new ReversibleActionPairCommand(new AddDutyShiftCommand(eventList),
                     new CancelDutyShiftCommand(eventList));
@@ -96,14 +94,14 @@ public class AddDutyShiftCommandParser implements Parser<ReversibleActionPairCom
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddDutyShiftCommand.MESSAGE_USAGE));
             }
-            Event event = new Event(referenceId, timing, new Status());
+            DutyEvent event = new DutyEvent(referenceId, timing, new Status());
             return new ReversibleActionPairCommand(
                     new AddDutyShiftCommand(event),
                     new CancelDutyShiftCommand(event));
         }
     }
 
-    private List<Event> getRecEvents(Event event, String recursiveString, int times) {
+    private List<Event> getRecEvents(DutyEvent event, String recursiveString, int times) {
         List<Event> eventList = new ArrayList<>();
         Timing timing = event.getEventTiming();
         Function<Timing, Timing> func = null;
@@ -124,7 +122,7 @@ public class AddDutyShiftCommandParser implements Parser<ReversibleActionPairCom
         }
 
         for (int i = 0; i < times; i++) {
-            eventList.add(new Event(event.getPersonId(), timing, new Status()));
+            eventList.add(new DutyEvent(event.getPersonId(), timing, new Status()));
             timing = func.apply(timing);
         }
 
