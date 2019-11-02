@@ -40,8 +40,8 @@ public class AddDutyShiftCommand extends ReversibleCommand {
             + "[" + PREFIX_RECURSIVE_TIMES + "PREFIX_RECURSIVE_TIMES]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "STAFF001 "
-            + PREFIX_START + SampleAppointmentDataUtil.NEXT_MORNING.toString() + " "
-            + PREFIX_END + SampleAppointmentDataUtil.NEXT_EVENING.toString() + " "
+            + PREFIX_START + SampleAppointmentDataUtil.ONE_MONTH_LATER_MORNING.toString() + " "
+            + PREFIX_END + SampleAppointmentDataUtil.ONE_MONTH_LATER_EVENING.toString() + " "
             + PREFIX_RECURSIVE + "m "
             + PREFIX_RECURSIVE_TIMES + "2\n";
 

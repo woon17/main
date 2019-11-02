@@ -26,8 +26,8 @@ public class ChangeDutyShiftCommand extends ReversibleCommand {
             + PREFIX_START + "PREFIX_START "
             + PREFIX_END + "PREFIX_END\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_START + SampleAppointmentDataUtil.THREE_DAYS_LATER_MORNING.toString() + " "
-            + PREFIX_END + SampleAppointmentDataUtil.THREE_DAYS_LATER_EVENING.toString() + " ";
+            + PREFIX_START + SampleAppointmentDataUtil.TWO_MONTH_LATER_MORNING.toString() + " "
+            + PREFIX_END + SampleAppointmentDataUtil.TWO_MONTH_LATER_EVENING.toString() + " ";
 
     public static final String MESSAGE_SUCCESS = "No. %1$s changed to new %2$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This duty shift already exists in the duty roster";
