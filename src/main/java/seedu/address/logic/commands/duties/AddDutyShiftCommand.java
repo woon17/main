@@ -28,7 +28,7 @@ import seedu.address.model.util.SampleAppointmentDataUtil;
  */
 public class AddDutyShiftCommand extends ReversibleCommand {
 
-    public static final String COMMAND_WORD = "addshift";
+    public static final String COMMAND_WORD = "newshift";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds duty shifts recursively "
             + "to the duty roster. \n"

@@ -1,3 +1,4 @@
+//@@author woon17
 package seedu.address.logic.commands.duties;
 
 import static java.util.Objects.requireNonNull;
@@ -18,7 +19,7 @@ import seedu.address.model.util.SampleAppointmentDataUtil;
  * Changes the details of the duty shift.
  */
 public class ChangeDutyShiftCommand extends ReversibleCommand {
-    public static final String COMMAND_WORD = "changeshift";
+    public static final String COMMAND_WORD = "editshift";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": changes the details of a duty shift "
             + "by the index number used in the displayed duty roster.\n"

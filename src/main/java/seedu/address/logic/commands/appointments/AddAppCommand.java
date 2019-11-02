@@ -28,7 +28,7 @@ import seedu.address.model.util.SampleAppointmentDataUtil;
  */
 public class AddAppCommand extends ReversibleCommand {
 
-    public static final String COMMAND_WORD = "addappt";
+    public static final String COMMAND_WORD = "newappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds recursively appointments"
             + " to the address book. \n"

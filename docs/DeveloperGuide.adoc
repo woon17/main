@@ -294,19 +294,19 @@ Step 3: Patient will then be showed in the queue.
 === Appointment feature
 The Appointment feature provides users the ability to manage appointments for patients. It can help patients to add, change, delete appointments. It also helps user to find the missed appointments and settles each missing appointment efficiently.
 
-* e.g. `addappt i/001A str/01/11/19 1800 rec/m num/2` - allows the user to create two monthly appointments to patient whose referenceId is 001A.
-* e.g. `changeappt 1 str/02/11/19 1800` - allows the user to change a patient's first appointment timing to be the input timing if there is no conflict.
+* e.g. `newappt i/001A str/01/11/19 1800 rec/m num/2` - allows the user to create two monthly appointments to patient whose referenceId is 001A.
+* e.g. `editeappt 1 str/02/11/19 1800` - allows the user to change a patient's first appointment timing to be the input timing if there is no conflict.
 
 ==== Current Implementation
 The Appointment feature contains multiple operations to indirectly manipulate the UniqueAppointmentList. The implemented operations include:
 
-`addappt` Command - Adds a appointment or recursive appointments to a patient.
+`newappt` Command - Adds a appointment or recursive appointments to a patient.
 
 `ackappt` Command - Acknowledges a appointment once the patient reaches.
 
 `appointments` Command - Lists all upcoming appointment schedule or lists a specific patient's upcoming appointments.
 
-`changeappt` Command - Change a current appointment's timing to a different timing.
+`editeappt` Command - Change a current appointment's timing to a different timing.
 
 `cancelappt` Command - Cancels appointments found within the appointment schedule.
 
@@ -324,12 +324,12 @@ Each Appointment object consists of a PatientId, Timing, Status. Timing class ha
 
 The current implementation of Appointment will do check with patient object by the unique referenceId and it will also check timing with doctors' dutyRoster. If the referenceId exists within the Model#UniquePatientList and the timing is valid, then constructing the Appointment object. This ensures that the patient is registered and the appointment's timing is valid before making an appointment.
 
-==== `addappt` Command
+==== `newappt` Command
 The addAppointment command behaves similarly to the add command used for Patient and Doctor. The command takes in the parameters required to construct ReferenceId, DateTime and Status. The image below shows how the Appointment object is constructed.
 
 The following activity diagram summarizes what happens when a user executes a AddAppointment command:
 
-.Interactions Inside the Logic Component when a user executes a `addappt` command
+.Interactions Inside the Logic Component when a user executes a `newappt` command
 image::AddAppointmentActivityDiagram.png[]
 
 ==== `ackappt` command
@@ -348,10 +348,10 @@ Case 2: `appointments`
 
 The appointments behaves similarly to appointments with the exception that it does not take in any arguments. Instead, it automatically executes with the predicate EventContainsApprovedStatusPredicate. updateFilteredAppointmentList() is called and the entire list of upcoming appointments is shown to the user.
 
-==== `changeappt` Command
+==== `editeappt` Command
 The following activity diagram summarizes what happens when a user executes a ChangeAppointment command:
 
-.Interactions Inside the Logic Component when a user executes a `changeappt` command
+.Interactions Inside the Logic Component when a user executes a `editeappt` command
 
 image::ChangeAppointmentActivityDiagram.png[]
 

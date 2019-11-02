@@ -17,7 +17,7 @@ import seedu.address.model.util.SampleAppointmentDataUtil;
  * Chnageing the timing of the appointment.
  */
 public class ChangeAppCommand extends ReversibleCommand {
-    public static final String COMMAND_WORD = "changeappt";
+    public static final String COMMAND_WORD = "editeappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": change the appointment date "
             + "by the index number used in the displayed patient's list.\n"

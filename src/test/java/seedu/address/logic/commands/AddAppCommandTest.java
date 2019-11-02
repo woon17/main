@@ -42,11 +42,11 @@ class AddAppCommandTest {
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
         Event duplicateEventToadded = model.getFilteredAppointmentList().get(INDEX_FIRST_EVENT.getZeroBased());
-        AddAppCommand addapptCommand = new AddAppCommand(duplicateEventToadded);
+        AddAppCommand newapptCommand = new AddAppCommand(duplicateEventToadded);
 
         assertThrows(CommandException.class,
                 String.format(ModelManager.MESSAGE_NOT_OVERLAPPING_APPOINTMENT,
-                        duplicateEventToadded.getEventTiming().toString()), () -> addapptCommand.execute(model));
+                        duplicateEventToadded.getEventTiming().toString()), () -> newapptCommand.execute(model));
     }
 
     @Test
