@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.events.Event;
 import seedu.address.model.events.exceptions.InvalidEventScheduleChangeException;
 import seedu.address.model.events.predicates.EventContainsRefIdPredicate;
+import seedu.address.model.util.SampleAppointmentDataUtil;
 
 /**
  * Chnageing the timing of the appointment.
@@ -24,8 +25,8 @@ public class ChangeAppCommand extends ReversibleCommand {
             + PREFIX_START + "PREFIX_START "
             + "[" + PREFIX_END + "PREFIX_END]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_START + "01/11/19 1000 "
-            + PREFIX_END + "01/11/19 1040";
+            + PREFIX_START + SampleAppointmentDataUtil.NEXT_MORNING_PLUS_THREE.toString() + " "
+            + PREFIX_END + SampleAppointmentDataUtil.NEXT_MORNING_PLUS_FOUR.toString() + " ";
 
     public static final String MESSAGE_SUCCESS = "this appointment's details has been changed to\n%1$s";
     //public static final String MESSAGE_TIMING_EXIST = "please give a new valid timing for the appointment to change.";

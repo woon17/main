@@ -19,6 +19,30 @@ import seedu.address.model.person.parameters.PersonReferenceId;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleAppointmentDataUtil {
+
+    public static DateTime
+            NEXT_MORNING = new DateTime(LocalDateTime
+            .of(LocalDate.now(), LocalTime.of(9, 0)).plusDays(1));
+
+    public static DateTime
+            NEXT_EVENING = new DateTime(LocalDateTime
+            .of(LocalDate.now(), LocalTime.of(21, 0)).plusDays(1));
+
+    public static DateTime NEXT_MORNING_PLUS_ONE = new DateTime(LocalDateTime
+            .of(LocalDate.now(), LocalTime.of(10, 0)).plusDays(1));
+
+    public static DateTime NEXT_MORNING_PLUS_THREE = new DateTime(LocalDateTime
+            .of(LocalDate.now(), LocalTime.of(12, 0)).plusDays(1));
+
+    public static DateTime NEXT_MORNING_PLUS_FOUR = new DateTime(LocalDateTime
+            .of(LocalDate.now(), LocalTime.of(13, 0)).plusDays(1));
+
+    public static DateTime THREE_DAYS_LATER_MORNING = new DateTime(LocalDateTime
+            .of(LocalDate.now(), LocalTime.of(9, 0)).plusDays(3));
+
+    public static DateTime THREE_DAYS_LATER_EVENING = new DateTime(LocalDateTime
+            .of(LocalDate.now(), LocalTime.of(21, 0)).plusDays(3));
+
     private static DateTime toDateTime(String dateTime) {
         return DateTime.tryParseSimpleDateFormat(dateTime);
     }

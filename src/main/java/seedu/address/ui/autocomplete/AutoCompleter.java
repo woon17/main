@@ -42,10 +42,10 @@ import seedu.address.logic.commands.staff.RegisterStaffCommand;
  */
 public class AutoCompleter {
     private static final Map<String, Set<String>> SUPPORTED_ARGUMENTS = Map.ofEntries(
-            Map.entry("addappt", Set.of("-id", "-rec", "-num", "-start")),
-            Map.entry("addshift", Set.of("-id", "-rec", "-num", "-start")),
-            Map.entry("changeappt", Set.of("-start")),
-            Map.entry("changeshift", Set.of("-start")),
+            Map.entry("addappt", Set.of("-id", "-start", "-end", "-rec", "-num")),
+            Map.entry("addshift", Set.of("-id", "-start", "-end", "-rec", "-num")),
+            Map.entry("changeappt", Set.of("-start", "-end")),
+            Map.entry("changeshift", Set.of("-start", "-end")),
             Map.entry("edit", Set.of("-id", "-name", "-phone", "-address", "-tag", "-email")),
             Map.entry("newdoctor", Set.of("-id", "-name", "-phone", "-address", "-email")),
             Map.entry("register", Set.of("-id", "-name", "-phone", "-address", "-tag", "-email")),
