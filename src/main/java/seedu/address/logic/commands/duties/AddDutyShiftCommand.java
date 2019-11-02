@@ -20,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.events.Event;
 import seedu.address.model.events.exceptions.InvalidEventScheduleChangeException;
 import seedu.address.model.events.predicates.EventContainsRefIdPredicate;
+import seedu.address.model.util.SampleAppointmentDataUtil;
 
 
 /**
@@ -38,9 +39,9 @@ public class AddDutyShiftCommand extends ReversibleCommand {
             + "[" + PREFIX_RECURSIVE + "PREFIX_RECURSIVE w/m/y] "
             + "[" + PREFIX_RECURSIVE_TIMES + "PREFIX_RECURSIVE_TIMES]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ID + "S001A "
-            + PREFIX_START + "01/11/19 1800 "
-            + PREFIX_END + "01/11/19 1840 "
+            + PREFIX_ID + "STAFF001 "
+            + PREFIX_START + SampleAppointmentDataUtil.NEXT_MORNING.toString() + " "
+            + PREFIX_END + SampleAppointmentDataUtil.NEXT_EVENING.toString() + " "
             + PREFIX_RECURSIVE + "m "
             + PREFIX_RECURSIVE_TIMES + "2\n";
 

@@ -51,8 +51,9 @@ public class CancelDutyShiftCommandParser implements Parser<ReversibleActionPair
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CancelDutyShiftCommand.MESSAGE_USAGE), e);
         }
         DutyEvent eventToDelete = null;
-        if (ParserUtil.getEntryFromList(lastShownList, index) instanceof DutyEvent) {
-            eventToDelete = (DutyEvent) ParserUtil.getEntryFromList(lastShownList, index);
+        Event temp = ParserUtil.getEntryFromList(lastShownList, index);
+        if (temp instanceof DutyEvent) {
+            eventToDelete = (DutyEvent) temp;
         }
 
         return new ReversibleActionPairCommand(
