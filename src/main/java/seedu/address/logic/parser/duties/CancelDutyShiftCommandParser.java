@@ -14,6 +14,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.events.DutyEvent;
 import seedu.address.model.events.Event;
 
 
@@ -49,7 +50,11 @@ public class CancelDutyShiftCommandParser implements Parser<ReversibleActionPair
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CancelDutyShiftCommand.MESSAGE_USAGE), e);
         }
-        Event eventToDelete = ParserUtil.getEntryFromList(lastShownList, index);
+        DutyEvent eventToDelete = null;
+        if (ParserUtil.getEntryFromList(lastShownList, index) instanceof DutyEvent) {
+            eventToDelete = (DutyEvent) ParserUtil.getEntryFromList(lastShownList, index);
+        }
+
         return new ReversibleActionPairCommand(
                 new CancelDutyShiftCommand(eventToDelete),
                 new AddDutyShiftCommand(eventToDelete));

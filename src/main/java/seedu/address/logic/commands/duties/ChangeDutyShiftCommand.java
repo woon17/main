@@ -28,20 +28,22 @@ public class ChangeDutyShiftCommand extends ReversibleCommand {
             + PREFIX_START + "01/11/19 1800 "
             + PREFIX_END + "01/11/19 1900";
 
-    public static final String MESSAGE_SUCCESS = "Duty shift changed to %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the duty roster";
+    public static final String MESSAGE_SUCCESS = "No. %1$s changed to new %2$s";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This duty shift already exists in the duty roster";
 
     private final Event eventToEdit;
     private final Event editedEvent;
+    private final int idx;
 
     /**
      * Creates an ChangeAppCommand to add the specified {@code Person}
      */
-    public ChangeDutyShiftCommand(Event eventToEdit, Event editedEvent) {
+    public ChangeDutyShiftCommand(Event eventToEdit, Event editedEvent, int idx) {
         requireNonNull(eventToEdit);
         requireNonNull(editedEvent);
         this.eventToEdit = eventToEdit;
         this.editedEvent = editedEvent;
+        this.idx = idx + 1;
     }
 
     @Override
@@ -59,7 +61,7 @@ public class ChangeDutyShiftCommand extends ReversibleCommand {
         }
 
         model.updateFilteredDutyShiftList(new EventContainsRefIdPredicate(editedEvent.getPersonId()));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedEvent));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, idx, editedEvent));
     }
 
     @Override

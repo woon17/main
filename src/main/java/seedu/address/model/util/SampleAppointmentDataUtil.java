@@ -8,6 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAppointmentBook;
 import seedu.address.model.ReferenceId;
 import seedu.address.model.events.AppointmentBook;
+import seedu.address.model.events.DutyEvent;
 import seedu.address.model.events.Event;
 import seedu.address.model.events.parameters.DateTime;
 import seedu.address.model.events.parameters.Status;
@@ -109,9 +110,9 @@ public class SampleAppointmentDataUtil {
             endLocalDateTime = endLocalDateTime.plusDays(1);
             Timing workTiming = new Timing(new DateTime(startLocalDateTime), new DateTime(endLocalDateTime));
 
-            listOfEvents[i++] = new Event(staffRefId("S001A"), workTiming, status);
-            listOfEvents[i++] = new Event(staffRefId("S002B"), workTiming, status);
-            listOfEvents[i++] = new Event(staffRefId("S003C"), workTiming, status);
+            listOfEvents[i++] = new DutyEvent(staffRefId("S001A"), workTiming, status);
+            listOfEvents[i++] = new DutyEvent(staffRefId("S002B"), workTiming, status);
+            listOfEvents[i++] = new DutyEvent(staffRefId("S003C"), workTiming, status);
         }
         return listOfEvents;
     }

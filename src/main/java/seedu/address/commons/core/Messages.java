@@ -17,6 +17,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_APPOINTMENT_DATE_TIME = "The appointment dateTime provided is invalid!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_ALL_EVENTS_LISTED_OVERVIEW = "%1$d appointments listed!";
+    public static final String MESSAGE_ALL_EVENTS_DUTY_LISTED_OVERVIEW = "%1$d duty shifts listed!";
     public static final String MESSAGE_MISSED_EVENT_LISTED_OVERVIEW = "%1$d missing appointmennt need to settle!";
     public static final String MESSAGE_MISSED_EVENTS_LISTED_OVERVIEW = "%1$d missing appointmennts need to settle!";
     public static final String MESSAGE_INVALID_ROOM_INDEX = "Invalid room index provided!";

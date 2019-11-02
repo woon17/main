@@ -68,8 +68,8 @@ public class AddDutyShiftCommandParser implements Parser<ReversibleActionPairCom
         String startString = argMultimap.getValue(PREFIX_START).get();
         Timing timing;
 
-            String endString = argMultimap.getValue(PREFIX_END).get();
-            timing = ParserUtil.parseTiming(startString, endString);
+        String endString = argMultimap.getValue(PREFIX_END).get();
+        timing = ParserUtil.parseTiming(startString, endString);
 
         Optional<String> recursiveStringOptional = argMultimap.getValue(PREFIX_RECURSIVE);
         Optional<String> recursiveStringTimesOptional = argMultimap.getValue(PREFIX_RECURSIVE_TIMES);

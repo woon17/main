@@ -50,7 +50,8 @@ public class DutyShiftCommand extends NonActionableCommand {
         model.setTabListing(OmniPanelTab.DUTY_SHIFT_TAB);
         model.updateFilteredDutyShiftList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_ALL_EVENTS_LISTED_OVERVIEW, model.getFilteredDutyShiftList().size()));
+                String.format(Messages.MESSAGE_ALL_EVENTS_DUTY_LISTED_OVERVIEW,
+                        model.getFilteredDutyShiftList().size()));
     }
 
     @Override

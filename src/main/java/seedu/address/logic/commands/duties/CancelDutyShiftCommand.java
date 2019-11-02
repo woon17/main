@@ -70,6 +70,7 @@ public class CancelDutyShiftCommand extends ReversibleCommand {
     }
 
     //@@author SakuraBlossom
+
     /**
      * Checks if the given {@code eventToDelete} exist in the duty roster book.
      */

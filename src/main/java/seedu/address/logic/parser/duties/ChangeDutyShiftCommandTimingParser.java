@@ -20,6 +20,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.events.DutyEvent;
 import seedu.address.model.events.Event;
 import seedu.address.model.events.parameters.Status;
 import seedu.address.model.events.parameters.Timing;
@@ -66,19 +67,18 @@ public class ChangeDutyShiftCommandTimingParser implements Parser<ReversibleActi
             String startString = argMultimap.getValue(PREFIX_START).get();
             Timing timing;
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_END)) {
-                timing = ParserUtil.parseTiming(startString, null);
-            } else {
-                String endString = argMultimap.getValue(PREFIX_END).get();
-                timing = ParserUtil.parseTiming(startString, endString);
+            String endString = argMultimap.getValue(PREFIX_END).get();
+            timing = ParserUtil.parseTiming(startString, endString);
+            DutyEvent eventToEdit = null;
+            if (lastShownList.get(idx) instanceof DutyEvent) {
+                eventToEdit = (DutyEvent) lastShownList.get(idx);
             }
-            Event eventToEdit = lastShownList.get(idx);
 
-            Event editedEvent = new Event(eventToEdit.getPersonId(), timing, new Status());
+            DutyEvent editedEvent = new DutyEvent(eventToEdit.getPersonId(), timing, new Status());
 
             return new ReversibleActionPairCommand(
-                    new ChangeDutyShiftCommand(eventToEdit, editedEvent),
-                    new ChangeDutyShiftCommand(editedEvent, eventToEdit));
+                    new ChangeDutyShiftCommand(eventToEdit, editedEvent, idx),
+                    new ChangeDutyShiftCommand(editedEvent, eventToEdit, idx));
 
         } catch (ParseException e) {
             throw new ParseException(e.getMessage());
