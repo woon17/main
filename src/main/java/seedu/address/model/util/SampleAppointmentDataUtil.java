@@ -20,33 +20,33 @@ import seedu.address.model.person.parameters.PersonReferenceId;
  */
 public class SampleAppointmentDataUtil {
 
-    public static DateTime
+    public static final DateTime
             NEXT_MORNING = new DateTime(LocalDateTime
             .of(LocalDate.now(), LocalTime.of(9, 0)).plusDays(1));
 
-    public static DateTime
+    public static final DateTime
             NEXT_EVENING = new DateTime(LocalDateTime
             .of(LocalDate.now(), LocalTime.of(21, 0)).plusDays(1));
 
-    public static DateTime NEXT_MORNING_PLUS_ONE = new DateTime(LocalDateTime
+    public static final DateTime NEXT_MORNING_PLUS_ONE = new DateTime(LocalDateTime
             .of(LocalDate.now(), LocalTime.of(10, 0)).plusDays(1));
 
-    public static DateTime NEXT_MORNING_PLUS_THREE = new DateTime(LocalDateTime
+    public static final DateTime NEXT_MORNING_PLUS_THREE = new DateTime(LocalDateTime
             .of(LocalDate.now(), LocalTime.of(12, 30)).plusDays(1));
 
-    public static DateTime NEXT_MORNING_PLUS_FOUR = new DateTime(LocalDateTime
+    public static final DateTime NEXT_MORNING_PLUS_FOUR = new DateTime(LocalDateTime
             .of(LocalDate.now(), LocalTime.of(13, 0)).plusDays(1));
 
-    public static DateTime ONE_MONTH_LATER_MORNING = new DateTime(LocalDateTime
+    public static final DateTime ONE_MONTH_LATER_MORNING = new DateTime(LocalDateTime
             .of(LocalDate.now(), LocalTime.of(9, 0)).plusDays(31));
 
-    public static DateTime ONE_MONTH_LATER_EVENING = new DateTime(LocalDateTime
+    public static final DateTime ONE_MONTH_LATER_EVENING = new DateTime(LocalDateTime
             .of(LocalDate.now(), LocalTime.of(21, 0)).plusDays(31));
 
-    public static DateTime TWO_MONTH_LATER_MORNING = new DateTime(LocalDateTime
+    public static final DateTime TWO_MONTH_LATER_MORNING = new DateTime(LocalDateTime
             .of(LocalDate.now(), LocalTime.of(9, 30)).plusDays(50));
 
-    public static DateTime TWO_MONTH_LATER_EVENING = new DateTime(LocalDateTime
+    public static final DateTime TWO_MONTH_LATER_EVENING = new DateTime(LocalDateTime
             .of(LocalDate.now(), LocalTime.of(21, 30)).plusDays(50));
 
     private static DateTime toDateTime(String dateTime) {
@@ -158,7 +158,7 @@ public class SampleAppointmentDataUtil {
     public static ReadOnlyAppointmentBook getSampleDutyRosterBook() {
         AppointmentBook sampleAp = new AppointmentBook();
         for (Event sampleEvent : getSampleDutyShifts()) {
-            if(sampleEvent instanceof DutyEvent){
+            if (sampleEvent instanceof DutyEvent) {
                 sampleAp.addEvent(sampleEvent);
             }
         }
