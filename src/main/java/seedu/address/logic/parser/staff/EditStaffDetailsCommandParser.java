@@ -52,19 +52,14 @@ public class EditStaffDetailsCommandParser implements Parser<ReversibleActionPai
 
         Index index;
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ENTRY).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditStaffDetailsCommand.MESSAGE_USAGE), pe);
-        }
+        index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ENTRY).get());
         EditPersonDescriptor editPersonDescriptor = createEditedPersonDescriptor(argMultimap);
         Person personToEdit = ParserUtil.getEntryFromList(lastShownList, index);
         Person editedPerson = EditPatientDetailsCommandParser.createEditedPerson(personToEdit, editPersonDescriptor);
 
         return new ReversibleActionPairCommand(
-            new EditStaffDetailsCommand(personToEdit, editedPerson),
-            new EditStaffDetailsCommand(editedPerson, personToEdit));
+                new EditStaffDetailsCommand(personToEdit, editedPerson),
+                new EditStaffDetailsCommand(editedPerson, personToEdit));
     }
 
     /**

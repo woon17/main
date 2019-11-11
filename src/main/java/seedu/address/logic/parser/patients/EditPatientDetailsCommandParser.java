@@ -67,19 +67,16 @@ public class EditPatientDetailsCommandParser implements Parser<ReversibleActionP
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPatientDetailsCommand.MESSAGE_USAGE));
         }
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ENTRY).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditPatientDetailsCommand.MESSAGE_USAGE), pe);
-        }
+
+        index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ENTRY).get());
+
         EditPersonDescriptor editPersonDescriptor = createEditedPersonDescriptor(argMultimap);
         Person personToEdit = ParserUtil.getEntryFromList(lastShownList, index);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         return new ReversibleActionPairCommand(
-            new EditPatientDetailsCommand(personToEdit, editedPerson),
-            new EditPatientDetailsCommand(editedPerson, personToEdit));
+                new EditPatientDetailsCommand(personToEdit, editedPerson),
+                new EditPatientDetailsCommand(editedPerson, personToEdit));
     }
 
     /**
@@ -109,7 +106,7 @@ public class EditPatientDetailsCommandParser implements Parser<ReversibleActionP
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             editPersonDescriptor.setReferenceId(
-                ParserUtil.issuePatientReferenceId(argMultimap.getValue(PREFIX_ID).get()));
+                    ParserUtil.issuePatientReferenceId(argMultimap.getValue(PREFIX_ID).get()));
         }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
